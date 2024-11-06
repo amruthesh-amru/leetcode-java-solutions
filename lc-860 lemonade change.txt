@@ -1,0 +1,29 @@
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int fiveCnt = 0;
+        int tenCnt = 0;
+        for(int ele: bills){
+            if(ele == 5) fiveCnt++;
+            if(ele == 10) 
+            {
+                if(fiveCnt > 0){
+                    fiveCnt--; 
+                    tenCnt++;
+                }else{
+                    return false;
+                }
+            }
+            if(ele == 20) {
+                if(tenCnt > 0 && fiveCnt > 0){
+                    fiveCnt--; tenCnt--;
+                }
+                else if(fiveCnt >=3){
+                    fiveCnt-=3;
+                }else{
+                    return false;
+                }
+            }
+        }
+            return true;
+    }
+}
