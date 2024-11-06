@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        char[] ch1 = s.toCharArray();
+        char[] ch2 = t.toCharArray();
+        int l=0, r=0;
+        if( s.length() == 0) return true;
+        if( t.length() == 0) return false;
+        while(l<ch2.length && r < ch1.length){
+            if(ch1[r] == ch2[l]){
+                l++;
+                r++;
+            }else{
+                l++;
+            }
+        }
+        return r==ch1.length;
+    }
+}
