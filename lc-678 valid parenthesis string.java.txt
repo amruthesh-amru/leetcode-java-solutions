@@ -1,0 +1,32 @@
+class Solution {
+    public boolean checkValidString(String s) {
+        Stack<Character> st = new Stack<>();
+        char[] ch = s.toCharArray();
+        int leftBalance = 0;
+        int rightBalance = 0;
+        int open =0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) == '(' || s.charAt(i) == '*' ){
+                leftBalance++;
+            }else{
+                leftBalance--;
+            }
+            if(leftBalance < 0){
+                return false;
+            }
+        }
+        for(int i=s.length()-1;i>=0;i--){
+            if(s.charAt(i) == ')' || s.charAt(i) == '*' ){
+                rightBalance++;
+            }else{
+                rightBalance--;
+            }
+            if(rightBalance < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+//my soultion passed 90% testcases but failed to handle '*' in the string efficiently, so took reference from gpt, intuition is to 
+//consider '*' as '(' in first loop and ')' in second loop and we will return false if the count is less than zero 
