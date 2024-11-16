@@ -23,9 +23,28 @@ class Solution {
         inordertraversal(res,node.right);
 
     }
+    private void iterativeInorderApproach(List<Integer> res, TreeNode root){
+        Stack<TreeNode> st = new Stack<>();
+        TreeNode node = root;
+        //think of how recursive appraoch works in order to build iterative appraoach
+       while(true){
+            if(node != null){
+                st.push(node);
+                node = node.left;
+            }else{
+                if(st.isEmpty()){
+                    break;
+                }
+                node = st.pop();
+                res.add(node.val);
+                node = node.right;
+            }
+       }
+    }
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        inordertraversal(res,root);
+        // inordertraversal(res,root);
+        iterativeInorderApproach(res,root);
         return res;
     }
 }
