@@ -14,3 +14,23 @@ class Solution {
         return maxCnt;
     }
 }
+
+//below is a slight better version of above
+//instead of calculating max value for every occurrence of 1 we calculate it when 0 appears
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int cnt = 0;
+        int maxCnt = 0;
+        
+        for(int ele : nums){
+            if(ele == 0){
+                maxCnt = Math.max(cnt,maxCnt);
+                cnt = 0;
+            }else{
+                cnt++;
+            }
+        }
+        maxCnt = Math.max(cnt,maxCnt);
+        return maxCnt;
+    }
+}
