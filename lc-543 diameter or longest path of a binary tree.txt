@@ -1,0 +1,79 @@
+//First approach
+//striver's solution, not efficient we try to calculate longest path for each node and return the longest one 
+class Solution {
+    private int maxi = 0;
+    private int height(TreeNode root){
+        if(root == null) return 0;
+
+       int left = height(root.left);
+        int right = height(root.right);
+
+        return 1 + Math.max(left , right);
+    }
+    private void findDia(TreeNode root){
+        if(root == null){
+            return;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+
+        maxi = Math.max(maxi,left+right);
+
+        findDia(root.left);
+        findDia(root.right);
+
+
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+         findDia(root);
+         return maxi;
+    }
+}
+
+
+//second approach 
+//this solution makes use of function of finding a height of the binary tree, it does it by calculating max height of each node 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private int maxi = 0;
+    private int height(TreeNode root){
+        if(root == null) return 0;
+
+       int left = height(root.left);
+        int right = height(root.right);
+        maxi = Math.max(maxi,left+right);
+        return 1 + Math.max(left , right);
+    }
+    private void findDia(TreeNode root){
+        if(root == null){
+            return;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+
+        maxi =  Math.max(maxi,left+right);
+
+        findDia(root.left);
+        findDia(root.right);
+
+
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+         height(root);
+         return maxi;
+    }
+}
