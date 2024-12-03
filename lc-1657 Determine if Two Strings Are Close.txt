@@ -1,0 +1,71 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+
+        if(word1.length() != word2.length()){
+            return false;
+        }
+
+        char[] ch1 = word1.toCharArray();
+        char[] ch2 = word2.toCharArray();
+
+        HashMap<Character,Integer> set1 = new HashMap<>();
+        HashMap<Character,Integer> set2 = new HashMap<>();
+
+        for(int i=0;i<ch1.length;i++){
+            set1.put(ch1[i],set1.getOrDefault(ch1[i],0)+1);
+            set2.put(ch2[i],set2.getOrDefault(ch2[i],0)+1);
+        }
+        
+        if (!set1.keySet().equals(set2.keySet())) {
+            return false;
+        }
+
+        List<Integer> freq1 = new ArrayList<>(set1.values());
+        List<Integer> freq2 = new ArrayList<>(set2.values());
+
+        Collections.sort(freq1);
+        Collections.sort(freq2);
+
+        return freq1.equals(freq2);
+
+    }
+}
+
+//below is the optimal solution but need to learn how exactly we can create frequency array for charecters
+// import java.util.Arrays;
+
+// class Solution {
+//     public boolean closeStrings(String word1, String word2) {
+//         // Step 1: Early return if lengths differ
+//         if (word1.length() != word2.length()) {
+//             return false;
+//         }
+
+//         // Step 2: Count character frequencies
+//         int[] freq1 = new int[26];
+//         int[] freq2 = new int[26];
+//         boolean[] charSet1 = new boolean[26];
+//         boolean[] charSet2 = new boolean[26];
+
+//         for (char c : word1.toCharArray()) {
+//             freq1[c - 'a']++;
+//             charSet1[c - 'a'] = true;
+//         }
+
+//         for (char c : word2.toCharArray()) {
+//             freq2[c - 'a']++;
+//             charSet2[c - 'a'] = true;
+//         }
+
+//         // Step 3: Compare character sets (keys)
+//         if (!Arrays.equals(charSet1, charSet2)) {
+//             return false;
+//         }
+
+//         // Step 4: Compare frequency distributions
+//         Arrays.sort(freq1);
+//         Arrays.sort(freq2);
+
+//         return Arrays.equals(freq1, freq2);
+//     }
+// }
