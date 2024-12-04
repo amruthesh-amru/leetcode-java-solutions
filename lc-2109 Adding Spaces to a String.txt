@@ -1,0 +1,22 @@
+//youtube ref - techdose
+class Solution {
+    public String addSpaces(String s, int[] spaces) {
+        StringBuilder res = new StringBuilder();
+        
+        int l=0,r=0;
+        while(l < s.length()){
+            if(r < spaces.length && l == spaces[r]){
+                res.append(" ");
+                r++;
+            }
+            res.append(s.charAt(l));
+            l++;
+        }
+    return res.toString();
+    }
+}
+    //below works but exceds time limit
+        // for(int i=spaces.length-1;i>=0;i--){
+        //     res.insert(spaces[i]," ");
+        // }
+        // return res.toString();
