@@ -1,0 +1,33 @@
+class Solution {
+    public String removeStars(String s) {
+    //below is the code i learnt from solution tab in leetcode,for understanding i used chatGPT
+    char[] ch = s.toCharArray();
+    int pt = 0;
+    for(char ele : ch){
+        if(ele == '*'){
+            pt--;
+        }else{
+            ch[pt++] = ele;
+        }
+    }
+    return new String(ch,0,pt);
+    }
+
+
+}
+        //below code is my own and has a runtime of 75ms
+        // char[] ch = s.toCharArray();
+        // Stack<Character> st = new Stack<>();
+        // StringBuilder res = new StringBuilder();
+        // for(int i=0;i<ch.length;i++){
+        //     if(ch[i] != '*'){
+        //         st.push(ch[i]);
+        //     }else{
+        //         st.pop();
+        //     }
+        // }
+        // int size = st.size();
+        // for(int i=0;i<size;i++){
+        //     res.append(st.pop());
+        // }
+        // return res.reverse().toString();
