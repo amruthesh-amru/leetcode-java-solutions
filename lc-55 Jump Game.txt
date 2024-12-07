@@ -1,0 +1,20 @@
+//edge case 
+//1 2 3 1 1 0 2 5
+//whenever i passes the maxIndex, it is confirmed that it cannot reach the last index
+//trace out the above edge case to understand properly
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        int maxIndex = 0;
+        int i=0;
+        while( i<nums.length){
+            if(i> maxIndex){
+                return false;
+            }
+            maxIndex = Math.max(maxIndex,i+nums[i]);
+            if(maxIndex >= nums.length) return true; //improves efficiency by reducing the iterations
+            i++;
+        }
+        return true;
+    }
+}
