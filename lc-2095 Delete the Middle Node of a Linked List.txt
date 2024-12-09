@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ //LeetCode 75
+class Solution {
+    private int findSize(ListNode node){
+        int size = 0;
+        while(node != null){
+            size++;
+            node = node.next;
+        }
+        return size;
+    }
+    public ListNode deleteMiddle(ListNode head) {
+        if( head.next == null) return null;
+        ///using fast slow pointers
+        ListNode slow = head;
+        ListNode fast = head.next.next;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+}
+        //brute force
+        // if (head == null || head.next == null) {
+        //     return null; // If list is empty or has one node, return null
+        // }
+        // int length = findSize(head);
+        // int middleIndex = length /2;
+
+        // ListNode dummy = new ListNode(-1,head); //ListNode(value,next pointer)
+        // ListNode tempHead = dummy;
+
+        // for(int i=0;i< middleIndex;i++){
+        //     tempHead = tempHead.next;
+        // }
+        //     tempHead.next = tempHead.next.next;
+        
+        // return dummy.next;
