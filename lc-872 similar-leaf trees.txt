@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private void generateLeafSequence(TreeNode root,List<Integer> sequence){
+        if(root.left == null && root.right == null) {
+            sequence.add(root.val);
+        }
+        if(root.left != null) generateLeafSequence(root.left,sequence);
+        if(root.right != null) generateLeafSequence(root.right,sequence);
+
+    }
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> seq1 = new ArrayList<Integer>();
+        List<Integer> seq2 = new ArrayList<Integer>();
+        generateLeafSequence(root1,seq1);
+        generateLeafSequence(root2,seq2);
+
+        if(seq1.size() != seq2.size()) return false;
+
+        for(int i=0;i<seq1.size();i++){
+            if(!seq1.get(i).equals(seq2.get(i))) return false; 
+            //must use .equals operator instead of != bcz
+            //In Java, List<Integer> stores Integer objects, not primitive int values. When comparing two Integer objects using !=, Java checks if they are the same object (reference comparison), not if their values are equal.
+        }
+        return true;
+    }
+}
