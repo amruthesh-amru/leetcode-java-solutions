@@ -1,0 +1,51 @@
+
+// both solution below has time com of O(N) and space com of O(1) 
+//but the below solution's runtime is much faster
+class Solution {
+    public int romanToInt(String s) {
+        int number = 0, prev =0, ans =0;
+        for(int i = s.length()-1;i>=0;i--){
+            switch(s.charAt(i)){
+            case 'M' -> number = 1000;
+            case 'D' -> number = 500;
+            case 'C' -> number = 100;
+            case 'L' -> number = 50;
+            case 'X' -> number = 10;
+            case 'V' -> number = 5;
+            case 'I' -> number = 1;
+            }
+            if(number < prev){
+                ans -= number;
+            }else{
+                ans += number;
+            }
+            prev =number;
+        }
+        return ans;
+    }
+}
+
+// class Solution {
+//     public int romanToInt(String s) {
+//         HashMap<Character,Integer> romanMap = new HashMap<>();
+//         romanMap.put('I', 1);
+//         romanMap.put('V', 5);
+//         romanMap.put('X', 10);
+//         romanMap.put('L', 50);
+//         romanMap.put('C', 100);
+//         romanMap.put('D', 500);
+//         romanMap.put('M', 1000);
+//         int integerValue = 0;
+//         for(int i = 0;i<s.length();i++){
+//            char curRomanSymbol = s.charAt(i);
+//            int value = romanMap.get(curRomanSymbol);
+//            if(i<s.length()-1 && value < romanMap.get(s.charAt(i+1))){
+//                 integerValue -= value;
+//            }else{
+//                 integerValue += value;
+//            }
+//         }
+//         return integerValue;
+//     }
+// }
+

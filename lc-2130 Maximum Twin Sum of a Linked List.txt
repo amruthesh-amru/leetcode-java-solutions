@@ -1,0 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ //better solution,O{n+n/2} and space of O(n)
+ class Solution {
+    public int pairSum(ListNode head) {
+        if(head.next == null) return head.val;
+        Stack<Integer> st = new Stack<>();
+        ListNode cur = head;
+        while(cur != null){
+            st.push(cur.val);
+            cur = cur.next;
+        }
+        cur = head;
+        int size = st.size();
+        int max = -1;
+        int i=1;
+        while(i <= size/2){
+            max = Math.max(max,cur.val+st.pop());
+            cur = cur.next;
+            i++;
+        }
+        return max;
+    }
+}
+ //brute force,O{n+m} and space of O(n) my solution instead of hashmap in my solution i could have also used arraylist
+// class Solution {
+//     public int pairSum(ListNode head) {
+//         HashMap<Integer,Integer> map = new HashMap<>();
+//         ListNode temp = head;
+//         if(temp.next == null) return temp.val;
+//         int size = 0;
+//         int max = -1;
+//         while( temp != null){
+//             map.put(size++,temp.val);
+//             temp = temp.next;
+//         }
+//         for(int i=0;i<=size/2;i++){
+//              max = Math.max(max,( map.get(i) + map.get(size-i-1)));
+//         }
+//         return max;
+//     }
+// }
