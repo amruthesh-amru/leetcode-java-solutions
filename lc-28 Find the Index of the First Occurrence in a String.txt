@@ -1,0 +1,25 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int i = 0,j=0;
+//ref YT - codestorywithMIK
+       while(i<(haystack.length()-needle.length())+1){
+            if(j == needle.length()) return i;
+            if( i<haystack.length() && j<needle.length()&& haystack.charAt(i+j) ==  needle.charAt(j)){
+                j++;
+            }else{
+                i++;
+                j=0;
+            }
+        }
+        return -1;
+    }
+}
+// int n = (haystack.length() - needle.length()) +1;
+        // for(int i=0;i<n;i++){
+        //     if(haystack.charAt(i) == needle.charAt(0)){
+        //         if(haystack.substring(i,needle.length()+i).equals(needle)){
+        //             return i;
+        //         }
+        //     }
+        // }
+        // return -1;
