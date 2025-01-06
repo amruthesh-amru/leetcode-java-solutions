@@ -1,0 +1,32 @@
+class Solution {
+    //solved using my own method, watch YT video for BS approach
+    public int findKthPositive(int[] arr, int k) {
+        HashSet<Integer> map = new HashSet<>();
+
+        for(int ele : arr){
+            map.add(ele);
+        }
+        int cnt = 0, miss = 1;
+        for(int i=1;i<=arr[arr.length-1];i++){
+            if(cnt == k) return miss;
+            if(!map.contains(i)){
+                miss = i;
+                cnt++;
+            }
+        }
+        return (arr[arr.length-1]+k)-cnt;
+
+        //0ms runtime but intution is very difficult 
+        // for(int num : arr) {
+        //     if(num <= k) {
+        //         k++;
+        //     } else {
+        //         break;
+        //     }
+        // }
+        // return k;
+
+
+
+    }
+}

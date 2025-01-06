@@ -1,0 +1,40 @@
+//not understoood at all
+//understood problem statement in YT - neetcode
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        if (hand.length % groupSize != 0) return false; // Cards must be divisible by group size
+
+        // Frequency map to count occurrences of each card
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int card : hand) {
+            map.put(card, map.getOrDefault(card, 0) + 1);
+        }
+
+        // Min-Heap with unique keys from the frequency map
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(map.keySet());
+
+        while (!minHeap.isEmpty()) {
+            int first = minHeap.peek(); // Smallest card in the heap
+
+            // Attempt to form a group starting with 'first'
+            for (int i = first; i < first + groupSize; i++) {
+                if (!map.containsKey(i) || map.get(i) == 0) {
+                    return false; // Cannot form the group
+                }
+
+                // Decrease the count of the card
+                map.put(i, map.get(i) - 1);
+
+                // If count becomes zero, remove it from the map and heap
+                if (map.get(i) == 0) {
+                    map.remove(i);
+                    if (i == minHeap.peek()) {
+                        minHeap.poll(); // Remove from the heap if it's the smallest
+                    }
+                }
+            }
+        }
+
+        return true; // All groups formed successfully
+    }
+}
