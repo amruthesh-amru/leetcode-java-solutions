@@ -1,0 +1,57 @@
+class Solution {
+
+    public int maxVowels(String s, int k) {
+        List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u');
+        char[] ch = s.toCharArray();
+        int cnt = 0;
+        int maxCnt = 0;
+       for(int i=0;i<k;i++){
+        if(vowels.contains(ch[i])){
+            cnt++;
+        }
+       }
+        maxCnt = cnt;
+       for(int i=k;i<ch.length;i++){
+            if(vowels.contains(ch[i-k])){
+                cnt--;
+            }
+            if(vowels.contains(ch[i])){
+                cnt++;
+            }
+       maxCnt = Math.max(maxCnt,cnt);
+       }
+       return maxCnt;
+    }
+
+	//below problems exceeds time limit O(n^2)
+    // private int maxCnt = 0;
+    // private List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u');
+
+    // private void cntVowel(int l,int r,char[] ch){
+    //     int curCnt = 0;
+    //     for(int i=l;i<r;i++){
+    //         if(vowels.contains(ch[i])){
+    //             curCnt++;
+    //         }
+    //     }
+    //     maxCnt = Math.max(maxCnt,curCnt);
+    // }
+    // public int maxVowels(String s, int k) {
+    //     int l=0,r=0;
+    //     char[] ch = s.toCharArray();
+    //     int curCnt = 0;
+    //     while(r<k){
+    //         if(vowels.contains(ch[r])){
+    //             curCnt++;
+    //         }
+    //         r++;
+    //     }
+    //     maxCnt = Math.max(maxCnt,curCnt);
+    //     while(r<s.length()){
+    //         l++;
+    //         r++;
+    //         cntVowel(l,r,ch);
+    //     }
+    //     return maxCnt;
+    // }
+}
